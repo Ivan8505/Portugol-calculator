@@ -1,0 +1,216 @@
+programa
+{
+	inclua biblioteca Util --> u
+	inteiro l, c, z = 0
+	caracter a[3][3], t = 'x', o = 'o', op
+	cadeia name, name2
+	funcao inicio()
+	{
+		para(inteiro x=0; x < 3; x++){
+		para(inteiro i=0; i < 3; i++){
+			a[x][i] = ' '
+		}
+		}
+	menu()
+	}
+	funcao menu(){
+		escreva("[1] ia versus você\n[2] dois players")
+		leia(z)
+		se(z == 2){
+			menu2()
+		}senao se(z == 1){
+			menu3()
+		}senao{
+			menu()
+		}
+	}
+	funcao menu2(){
+		
+		inteiro p = 0
+		escreva("insira o nome do jogador 1: ")
+		leia(name)
+		escreva("insira o nome do jogador 2: ")
+		leia(name2)
+		faca{
+			escreva("\n[x] ou [o]\nopção: ")
+			leia(op)
+			se(op == 'x'){
+				escreva("\n", name, " ficou com x e o ", name2, " com a bolinha\n")
+				t = 'x'
+				o = 'o'
+				player1()
+			}senao se(op == 'o'){
+				escreva("\n", name, " ficou com a bolinha e o ", name2, " com o x\n")
+				t = 'o'
+				o = 'x'
+				player1()
+			}
+		}enquanto(p == 0)
+	}
+	funcao player1(){
+		z=0
+		enquanto(z == 0){
+			escreva("insira a linha: ")
+			leia(c)
+			escreva("insira a coluna: ")
+			leia(l)
+			se(l > 2 ou c > 2){
+				escreva("cordenada invalida insira novamente\n")
+			}senao se(a[l][c] == ' '){
+				a[l][c] = t
+				z = 1
+				limpa()
+				para(inteiro x=0; x < 3; x++){
+				para(inteiro i=0; i < 3; i++){
+					escreva("[", a[x][i], "]")
+				}
+				escreva("\n")
+				}
+			}senao{
+				escreva("cordenada invalida insira novamente\n")
+			}
+			
+		}
+		se(
+			a[0][0] == t e a[0][1] == t e a[0][2] == t ou
+			a[1][0] == t e a[1][1] == t e a[1][2] == t ou
+			a[2][0] == t e a[2][1] == t e a[2][2] == t ou
+			a[0][0] == t e a[1][1] == t e a[2][2] == t ou
+			a[2][0] == t e a[1][1] == t e a[0][2] == t ou
+			a[0][0] == t e a[1][0] == t e a[2][0] == t ou
+			a[0][1] == t e a[1][1] == t e a[2][1] == t ou
+			a[0][2] == t e a[1][2] == t e a[2][1] == t
+			){
+				escreva("\no ", name, " venceu a partida")
+				win()
+			}senao{
+				player2()
+			}
+		
+	}
+	funcao player2(){
+		z=0
+		enquanto(z == 0){
+			escreva("insira a linha: ")
+			leia(c)
+			escreva("insira a coluna: ")
+			leia(l)
+			se(l > 2 ou c > 2){
+				escreva("cordenada invalida insira novamente\n")
+			}senao se(a[l][c] == ' '){
+				a[l][c] = o
+				limpa()
+				z = 1
+				para(inteiro x=0; x < 3; x++){
+				para(inteiro i=0; i < 3; i++){
+					escreva("[", a[x][i], "]")
+				}
+					escreva("\n")
+				}
+			}senao{
+				escreva("cordenada invalida insira novamente\n")
+			}
+		}
+		se(
+			a[0][0] == o e a[0][1] == o e a[0][2] == o ou
+			a[1][0] == o e a[1][1] == o e a[1][2] == o ou
+			a[2][0] == o e a[2][1] == o e a[2][2] == o ou
+			a[0][0] == o e a[1][1] == o e a[2][2] == o ou
+			a[2][0] == o e a[1][1] == o e a[0][2] == o ou
+			a[0][0] == o e a[1][0] == o e a[2][0] == o ou
+			a[0][1] == o e a[1][1] == o e a[2][1] == o ou
+			a[0][2] == o e a[1][2] == o e a[2][1] == o
+			){
+				escreva("\no ", name2, " venceu a partida")
+				win()
+			}senao{
+				player1()
+			}
+	}
+	funcao win(){
+		limpa()
+		menu()
+	}
+	funcao ia(){
+		z=0
+		enquanto(z == 0){
+		c = u.sorteia(0, 2)
+		l = u.sorteia(0, 2)
+			se(a[l][c] == ' '){
+				z = 1
+				a[l][c] = o
+				para(inteiro x=0; x < 3; x++){
+				para(inteiro i=0; i < 3; i++){
+					escreva("[", a[x][i], "]")
+				}
+				escreva("\n")
+				}
+			}
+		}
+			se(
+				a[0][0] == o e a[0][1] == o e a[0][2] == o ou
+				a[1][0] == o e a[1][1] == o e a[1][2] == o ou
+				a[2][0] == o e a[2][1] == o e a[2][2] == o ou
+				a[0][0] == o e a[1][1] == o e a[2][2] == o ou
+				a[2][0] == o e a[1][1] == o e a[0][2] == o ou
+				a[0][0] == o e a[1][0] == o e a[2][0] == o ou
+				a[0][1] == o e a[1][1] == o e a[2][1] == o ou
+				a[0][2] == o e a[1][2] == o e a[2][1] == o
+			){
+				escreva("\no ia venceu a partida")
+				win()
+			}senao{
+				player3()
+			}
+	}
+	funcao player3(){
+				z=0
+		enquanto(z == 0){
+			escreva("insira a linha: ")
+			leia(c)
+			escreva("insira a coluna: ")
+			leia(l)
+			se(l > 2 ou c > 2){
+				escreva("cordenada invalida insira novamente\n")
+			}senao se(a[l][c] == ' '){
+				a[l][c] = t
+				z = 1
+				limpa()
+				
+			}senao{
+				escreva("cordenada invalida insira novamente\n")
+			}
+			
+		}
+		se(
+			a[0][0] == t e a[0][1] == t e a[0][2] == t ou
+			a[1][0] == t e a[1][1] == t e a[1][2] == t ou
+			a[2][0] == t e a[2][1] == t e a[2][2] == t ou
+			a[0][0] == t e a[1][1] == t e a[2][2] == t ou
+			a[2][0] == t e a[1][1] == t e a[0][2] == t ou
+			a[0][0] == t e a[1][0] == t e a[2][0] == t ou
+			a[0][1] == t e a[1][1] == t e a[2][1] == t ou
+			a[0][2] == t e a[1][2] == t e a[2][1] == t
+			){
+				escreva("\nvocê venceu a partida\n")
+				win()
+			}senao{
+				ia()
+		}
+	}
+	funcao menu3(){
+		escreva("[x] ou [o]\nopção: ")
+		leia(op)
+		se(op == 'x'){
+			t = 'x'
+			o = 'o'
+			ia()
+		}senao se(op == 'o'){
+			t = 'o'
+			o = 'x'
+			ia()
+		}senao{
+			menu3()
+		}
+	}
+}
